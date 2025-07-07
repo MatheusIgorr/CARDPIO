@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeuDelivery - Delivery de Comida Deliciosa</title>
+    <meta name="description" content="Delivery de comida deliciosa. Faça seu pedido online!">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo" onclick="selectCategory('all')">
+                    <span class="logo-seu">Seu</span>
+                    <span class="logo-delivery">Delivery</span>
+                </div>
+
+                <nav class="nav-desktop">
+                    <button onclick="selectCategory('all')" class="nav-link">Todos</button>
+                    <button onclick="selectCategory('pizzas')" class="nav-link">Pizzas</button>
+                    <button onclick="selectCategory('burgers')" class="nav-link">Hambúrgueres</button>
+                    <button onclick="selectCategory('sides')" class="nav-link">Acompanhamentos</button>
+                    <button onclick="selectCategory('drinks')" class="nav-link">Bebidas</button>
+                    <button onclick="selectCategory('desserts')" class="nav-link">Sobremesas</button>
+                </nav>
+
+                <div class="header-actions">
+                    <button id="cart-btn" class="cart-btn" onclick="toggleCart()">
+                        <i data-lucide="shopping-bag"></i>
+                        <span id="cart-count" class="cart-count hidden">0</span>
+                    </button>
+
+                    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                        <i id="mobile-menu-icon" data-lucide="menu"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="mobile-menu">
+                <div class="mobile-menu-content">
+                    <nav class="mobile-nav">
+                        <button onclick="selectCategory('all')" class="mobile-nav-link">Todos</button>
+                        <button onclick="selectCategory('pizzas')" class="mobile-nav-link">Pizzas</button>
+                        <button onclick="selectCategory('burgers')" class="mobile-nav-link">Hambúrgueres</button>
+                        <button onclick="selectCategory('sides')" class="mobile-nav-link">Acompanhamentos</button>
+                        <button onclick="selectCategory('drinks')" class="mobile-nav-link">Bebidas</button>
+                        <button onclick="selectCategory('desserts')" class="mobile-nav-link">Sobremesas</button>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    Sabor que <span class="hero-highlight">encanta</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Delícias preparadas com ingredientes selecionados e muito amor
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="scrollToMenu()">Peça agora</button>
+                    <button class="btn-secondary" onclick="scrollToMenu()">Ver cardápio</button>
+                </div>
+            </div>
+            <div class="scroll-indicator" onclick="scrollToMenu()">
+                <i data-lucide="arrow-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Featured Items Section -->
+        <section id="featured-section" class="featured-section">
+            <div class="container">
+                <div class="featured-header">
+                    <h2 class="featured-title">
+                        Nossos <span class="text-orange">Destaques</span>
+                    </h2>
+                    <p class="featured-subtitle">
+                        As 9 melhores pizzas selecionadas especialmente para você
+                    </p>
+                    <div class="featured-info">
+                        9 pizzas • 3 rotações de 3 pizzas cada
+                    </div>
+                </div>
+
+                <div class="carousel-container">
+                    <button class="carousel-btn carousel-prev" onclick="prevSlide()">
+                        <i data-lucide="chevron-left"></i>
+                    </button>
+
+                    <div class="carousel-wrapper">
+                        <div id="carousel" class="carousel">
+                            <!-- Featured items will be inserted here by JavaScript -->
+                        </div>
+                    </div>
+
+                    <button class="carousel-btn carousel-next" onclick="nextSlide()">
+                        <i data-lucide="chevron-right"></i>
+                    </button>
+                </div>
+
+                <div class="carousel-dots" id="carousel-dots">
+                    <!-- Dots will be inserted here by JavaScript -->
+                </div>
+
+                <div class="carousel-counter" id="carousel-counter">1 de 3</div>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <div id="menu" class="menu-section">
+            <div class="container">
+                <!-- Category Navigation -->
+                <div class="category-nav">
+                    <div class="category-buttons">
+                        <button onclick="selectCategory('all')" class="category-btn active" data-category="all">
+                            🍽️ Todos
+                        </button>
+                        <button onclick="selectCategory('pizzas')" class="category-btn" data-category="pizzas">
+                            🍕 Pizzas
+                        </button>
+                        <button onclick="selectCategory('burgers')" class="category-btn" data-category="burgers">
+                            🍔 Hambúrgueres
+                        </button>
+                        <button onclick="selectCategory('sides')" class="category-btn" data-category="sides">
+                            🍟 Acompanhamentos
+                        </button>
+                        <button onclick="selectCategory('drinks')" class="category-btn" data-category="drinks">
+                            🥤 Bebidas
+                        </button>
+                        <button onclick="selectCategory('desserts')" class="category-btn" data-category="desserts">
+                            🍰 Sobremesas
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Menu Items -->
+                <div id="menu-items" class="menu-items">
+                    <!-- Menu items will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-logo">
+                        <span class="text-orange">Seu</span>
+                        <span class="text-white">Delivery</span>
+                    </h3>
+                    <p class="footer-description">
+                        Entregando sabor e qualidade em cada pedido. Sua satisfação é nossa prioridade.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i data-lucide="instagram"></i></a>
+                        <a href="#" class="social-link"><i data-lucide="facebook"></i></a>
+                        <a href="#" class="social-link"><i data-lucide="twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">
+                        <i data-lucide="clock"></i>
+                        Horários
+                    </h4>
+                    <ul class="footer-list">
+                        <li><span>Segunda - Quinta:</span> <span>11h às 22h</span></li>
+                        <li><span>Sexta - Sábado:</span> <span>11h às 23h</span></li>
+                        <li><span>Domingo:</span> <span>12h às 22h</span></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Menu</h4>
+                    <ul class="footer-list">
+                        <li><a href="#" onclick="selectCategory('pizzas')">🍕 Pizzas</a></li>
+                        <li><a href="#" onclick="selectCategory('burgers')">🍔 Hambúrgueres</a></li>
+                        <li><a href="#" onclick="selectCategory('sides')">🍟 Acompanhamentos</a></li>
+                        <li><a href="#" onclick="selectCategory('drinks')">🥤 Bebidas</a></li>
+                        <li><a href="#" onclick="selectCategory('desserts')">🍰 Sobremesas</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">
+                        <i data-lucide="map-pin"></i>
+                        Contato
+                    </h4>
+                    <ul class="footer-list">
+                        <li>
+                            <i data-lucide="map-pin"></i>
+                            <div>
+                                <div>Av. das Delícias, 123</div>
+                                <div>Centro, Cidade - UF</div>
+                                <div>CEP: 00000-000</div>
+                            </div>
+                        </li>
+                        <li>
+                            <i data-lucide="mail"></i>
+                            <a href="mailto:contato@seudelivery.com">contato@seudelivery.com</a>
+                        </li>
+                        <li>
+                            <i data-lucide="phone"></i>
+                            <a href="tel:+5500123456789">(00) 1234-5678</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 SeuDelivery. Todos os direitos reservados.</p>
+                <div class="footer-links">
+                    <a href="#">Política de Privacidade</a>
+                    <a href="#">Termos de Uso</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-overlay" onclick="closeCart()"></div>
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2 class="cart-title">
+                    <i data-lucide="shopping-bag"></i>
+                    Seu carrinho
+                </h2>
+                <button class="cart-close" onclick="closeCart()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+
+            <div id="cart-items" class="cart-items">
+                <!-- Cart items will be inserted here -->
+            </div>
+
+            <div id="cart-footer" class="cart-footer">
+                <div class="cart-total">
+                    <span>Subtotal:</span>
+                    <span id="cart-total-price">R$ 0,00</span>
+                </div>
+                <button class="btn-checkout" onclick="openCheckout()">
+                    Finalizar pedido
+                </button>
+                <button class="btn-clear" onclick="clearCart()">
+                    Limpar carrinho
+                </button>
+            </div>
+
+            <div id="cart-empty" class="cart-empty">
+                <div class="cart-empty-icon">
+                    <i data-lucide="shopping-bag"></i>
+                </div>
+                <h3>Seu carrinho está vazio</h3>
+                <p>Adicione itens deliciosos do nosso menu</p>
+                <button class="btn-primary" onclick="closeCart()">
+                    Continuar comprando
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="checkout-modal">
+        <div class="checkout-overlay" onclick="closeCheckout()"></div>
+        <div class="checkout-content">
+            <div class="checkout-header">
+                <h2>Finalizar Pedido</h2>
+                <button class="checkout-close" onclick="closeCheckout()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+
+            <div class="checkout-body">
+                <form id="checkout-form">
+                    <div class="form-section">
+                        <h3>Seus dados</h3>
+                        <div class="form-group">
+                            <label for="customer-name">Nome completo</label>
+                            <input type="text" id="customer-name" name="name" placeholder="Seu nome completo" required>
+                            <div class="error-message" id="name-error"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Endereço de entrega</h3>
+                        <div class="form-group">
+                            <label for="zip-code">CEP</label>
+                            <div class="input-with-loading">
+                                <input type="text" id="zip-code" name="zipCode" placeholder="00000-000" maxlength="9" required>
+                                <div id="zip-loading" class="loading-spinner hidden"></div>
+                            </div>
+                            <div class="error-message" id="zipCode-error"></div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="street">Rua</label>
+                                <input type="text" id="street" name="street" placeholder="Rua / Avenida" required>
+                                <div class="error-message" id="street-error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="number">Número</label>
+                                <input type="text" id="number" name="number" placeholder="Número" required>
+                                <div class="error-message" id="number-error"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="complement">Complemento (opcional)</label>
+                            <input type="text" id="complement" name="complement" placeholder="Apto, bloco, referência, etc.">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="neighborhood">Bairro</label>
+                                <input type="text" id="neighborhood" name="neighborhood" placeholder="Bairro" required>
+                                <div class="error-message" id="neighborhood-error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">Cidade</label>
+                                <input type="text" id="city" name="city" placeholder="Cidade" required>
+                                <div class="error-message" id="city-error"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="state">Estado</label>
+                            <input type="text" id="state" name="state" placeholder="Estado" maxlength="2" required>
+                            <div class="error-message" id="state-error"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Forma de pagamento</h3>
+                        <div class="payment-methods">
+                            <label class="payment-method">
+                                <input type="radio" name="paymentMethod" value="credit" checked>
+                                <span>Cartão de Crédito</span>
+                            </label>
+                            <label class="payment-method">
+                                <input type="radio" name="paymentMethod" value="debit">
+                                <span>Cartão de Débito</span>
+                            </label>
+                            <label class="payment-method">
+                                <input type="radio" name="paymentMethod" value="cash">
+                                <span>Dinheiro</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="checkout-footer">
+                        <div class="checkout-total">
+                            <span>Total:</span>
+                            <span id="checkout-total-price">R$ 0,00</span>
+                        </div>
+                        <button type="submit" class="btn-whatsapp">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                            </svg>
+                            Enviar pedido via WhatsApp
+                        </button>
+                        <p class="whatsapp-info">
+                            Você será redirecionado para o WhatsApp com todos os detalhes do pedido
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="data.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
