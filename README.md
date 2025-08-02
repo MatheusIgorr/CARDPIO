@@ -1,4 +1,5 @@
 📦 Seu Delivery Aqui
+
 Seu Delivery Aqui é uma landing page moderna e responsiva para promover um serviço de entregas personalizado. O objetivo do site é apresentar uma proposta direta e visualmente atrativa para negócios que desejam contratar serviços de delivery de forma prática e rápida.
 
 🔗 Acesse o site aqui: https://seudeliveryaqui.netlify.app
